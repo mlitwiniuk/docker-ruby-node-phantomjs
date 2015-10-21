@@ -1,6 +1,10 @@
 machine:
   services:
     - docker
+test:
+  override:
+    - bundle exec rspec spec --format progress:
+        timeout: 1200 # Compiling node.js takes a while
 deployment:
   hub:
     branch: master
