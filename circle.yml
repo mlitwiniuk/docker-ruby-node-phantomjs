@@ -1,6 +1,17 @@
 machine:
   services:
     - docker
+
+dependencies:
+  cache_directories:
+    - "~/docker"
+  override:
+    - bundle install
+    - docker info
+    - if [[ -e ~/docker/image.tar ]]; then docker load --input ~/docker/image.tar; fi
+    - docker build -t edwinvdgraaf/ruby-node-phantomjs .
+    - mkdir -p ~/docker; docker save edwinvdgraaf/ruby-node-phantomjs > ~/docker/image.tar
+
 test:
   override:
     - bundle exec rspec spec --format progress:
