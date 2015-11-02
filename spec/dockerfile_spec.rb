@@ -27,8 +27,8 @@ describe "Dockerfile" do
     expect(os_version).to include("Ubuntu 14")
   end
 
-  # Libfontconfig is required at truntime for phantom
-  %w{git}.each do |p|
+  # Zip and yiu-compressor for roger release
+  %w{git zip yui-compressor}.each do |p|
     it "installs package #{p}" do
       expect(package(p)).to be_installed
     end

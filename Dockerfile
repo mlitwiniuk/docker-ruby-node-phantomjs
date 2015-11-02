@@ -6,7 +6,7 @@ RUN apt-get -y upgrade
 
 RUN apt-get -y install build-essential zlib1g-dev libssl-dev \
                libreadline6-dev libyaml-dev git python-software-properties \
-               fontconfig libjpeg8 libjpeg-turbo8 libicu52
+               fontconfig libjpeg8 libjpeg-turbo8 libicu52 zip yui-compressor
 
 ENV RUBY_DOWNLOAD_SHA256 df795f2f99860745a416092a4004b016ccf77e8b82dec956b120f18bdc71edce
 ADD https://cache.ruby-lang.org/pub/ruby/2.2/ruby-2.2.3.tar.gz /tmp/
