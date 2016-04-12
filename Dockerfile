@@ -55,4 +55,4 @@ RUN \
 # Install extra dependencies
 # separated from the compile dependencies for node and ruby
 # to make use of docker build layers
-RUN apt-get -y install zip yui-compressor
+RUN apt-get -y install zip yui-compressor curl
