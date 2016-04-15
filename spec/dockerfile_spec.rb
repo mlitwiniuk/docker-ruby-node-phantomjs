@@ -42,15 +42,15 @@ describe "Dockerfile" do
   end
 
   describe command("ruby -v") do
-    its(:stdout) { should match /2\.2\.3/ }
+    its(:stdout) { should match /2\.3\.0p0/ }
   end
 
   describe command("node -v") do
-    its(:stdout) { should match /4\.2\.1/ }
+    its(:stdout) { should match /5\.10\.1/ }
   end
 
   describe command("npm -v") do
-    its(:stdout) { should match /2\.14\.7/ }
+    its(:stdout) { should match /3\.8\.3/ }
   end
 
   describe command("phantomjs -v") do
