@@ -16,9 +16,11 @@ test:
   override:
     - bundle exec rspec spec --format progress:
         timeout: 1200 # Compiling node.js takes a while
+
 deployment:
   hub:
     tag: /v[0-9]+(\.[0-9]+)*/
     commands:
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
-      - docker push edwinvdgraaf/ruby-node-phantomjs
+      - docker tag edwinvdgraaf/ruby-node-phantomjs edwinvdgraaf/ruby-node-phantomjs:$CIRCLE_TAG
+      - docker push edwinvdgraaf/ruby-node-phantomjs:$CIRCLE_TAG
