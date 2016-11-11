@@ -53,6 +53,10 @@ describe "Dockerfile" do
     its(:stdout) { should match /3\.10\.3/ }
   end
 
+  describe command("yarn --version") do
+    its(:stdout) { should match /0\.16\.1/ }
+  end
+
   describe command("phantomjs -v") do
     its(:stdout) { should match /2\.0\.0/ }
   end

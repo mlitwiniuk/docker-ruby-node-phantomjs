@@ -43,6 +43,8 @@ RUN \
   rm -rf /tmp/node-v* && \
   echo -e '\n# Node.js\nexport PATH="node_modules/.bin:$PATH"' >> /root/.bashrc
 
+RUN npm install yarn@0.16.1 -g
+
 # Download phantomjs build (see README)
 RUN \
   cd /tmp && \
