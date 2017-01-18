@@ -54,7 +54,7 @@ describe "Dockerfile" do
   end
 
   describe command("yarn --version") do
-    its(:stdout) { should match /0\.16\.1/ }
+    its(:stdout) { should match /0\.19\.1/ }
   end
 
   describe command("phantomjs -v") do
