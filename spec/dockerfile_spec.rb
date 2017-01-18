@@ -58,7 +58,7 @@ describe "Dockerfile" do
   end
 
   describe command("phantomjs -v") do
-    its(:stdout) { should match /2\.0\.0/ }
+    its(:stdout) { should match /2\.1\.1/ }
   end
 
   def os_version
