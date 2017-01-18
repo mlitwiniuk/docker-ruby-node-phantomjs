@@ -1,5 +1,5 @@
 FROM ubuntu:14.04
-MAINTAINER Edwin van der Graaf <edwin@digitpaint.nl>
+MAINTAINER Flurin Egger <flurin@digitpaint.nl>
 
 RUN apt-get update
 RUN apt-get -y upgrade
@@ -48,7 +48,7 @@ RUN npm install yarn@0.16.1 -g
 # Download phantomjs build (see README)
 RUN \
   cd /tmp && \
-  git clone https://github.com/edwinvdgraaf/phantomjs-build.git && \
+  git clone https://github.com/digitpaint/phantomjs-build.git && \
   cd phantomjs-build && \
   cp bin/phantomjs /usr/local/bin/ && \
   cd /tmp && \
