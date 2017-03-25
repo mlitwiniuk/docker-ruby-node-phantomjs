@@ -1,6 +1,7 @@
 # Docker-ruby-node-phantomjs
 
-_This docker instances is the all in stop for running karma with a compiled phantomjs._
+Starting point for running Rails specs - includes ruby 2.3.3, node 6.10.1 and
+phantomjs 2.1.1
 
 ## What's inside
 
@@ -19,19 +20,19 @@ for OSX ([boot2docker](http://boot2docker.io/)) provides a adequate way to set t
 ### Getting the image
 
 ```
-$ docker pull edwinvdgraaf/ruby-node-phantomjs
+$ docker pull prograils/ruby-node-phantomjs
 ```
 
 ### Building the image (locally)
 
 ```
-$ docker build edwinvdgraaf/ruby-node-phantomjs .
+$ docker build prograils/ruby-node-phantomjs .
 ```
 
 ### Running
 
 ```
-$ docker run -t -i edwinvdgraaf/ruby-node-phantomjs
+$ docker run -t -i prograils/ruby-node-phantomjs
 ```
 
 ### Testing
