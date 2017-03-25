@@ -54,6 +54,5 @@ RUN \
   rm -rf /tmp/phantomjs-build
 
 # Install extra dependencies
-# separated from the compile dependencies for node and ruby
-# to make use of docker build layers
-#RUN apt-get -y install zip yui-compressor curl
+RUN apt-get -y install libpq-dev libmysqlclient-dev
+
