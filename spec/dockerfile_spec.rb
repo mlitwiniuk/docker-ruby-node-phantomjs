@@ -1,21 +1,19 @@
-require "serverspec"
-require "docker"
+require 'serverspec'
+require 'docker'
 
 # Workaround needed for circleCI
-if ENV["CIRCLECI"]
+if ENV['CIRCLECI']
   class Docker::Container
     def remove(*); end
-    alias_method :delete, :remove
+    alias delete remove
   end
 end
 
-describe "Dockerfile" do
+describe 'Dockerfile' do
   before(:all) do
-    image = Docker::Image.build_from_dir(".") do |v|
+    image = Docker::Image.build_from_dir('.') do |v|
       matches = v.match(/{\"stream\":\"(Step[^\\"]*)/)
-      if matches
-        puts "=> #{matches.captures[0]}"
-      end
+      puts "=> #{matches.captures[0]}" if matches
     end
 
     set :os, family: :debian
@@ -23,45 +21,41 @@ describe "Dockerfile" do
     set :docker_image, image.id
   end
 
-  it "ubuntu" do
-    expect(os_version).to include("Ubuntu 14")
+  it 'ubuntu' do
+    expect(os_version).to include('Ubuntu 16.04')
   end
 
-  # Zip and yiu-compressor for roger release
-  %w{git zip yui-compressor}.each do |p|
+  #
+  %w(git-core).each do |p|
     it "installs package #{p}" do
       expect(package(p)).to be_installed
     end
   end
 
   # PhantomJS runtime dependencies
-  %w{fontconfig libjpeg8 libjpeg-turbo8 libicu52}.each do |p|
+  %w(fontconfig libjpeg8 libjpeg-turbo8 libicu55).each do |p|
     it "installs package #{p}" do
       expect(package(p)).to be_installed
     end
   end
 
-  describe command("ruby -v") do
-    its(:stdout) { should match /2\.3\.0p0/ }
+  describe command('ruby -v') do
+    its(:stdout) { should match(/2\.3\.3p222/) }
   end
 
-  describe command("node -v") do
-    its(:stdout) { should match /6\.5\.0/ }
+  describe command('node -v') do
+    its(:stdout) { should match(/6\.10\.1/) }
   end
 
-  describe command("npm -v") do
-    its(:stdout) { should match /3\.10\.3/ }
+  describe command('npm -v') do
+    its(:stdout) { should match(/3\.10\.10/) }
   end
 
-  describe command("yarn --version") do
-    its(:stdout) { should match /0\.19\.1/ }
-  end
-
-  describe command("phantomjs -v") do
-    its(:stdout) { should match /2\.1\.1/ }
+  describe command('phantomjs -v') do
+    its(:stdout) { should match(/2\.1\.1/) }
   end
 
   def os_version
-    command("lsb_release -a").stdout
+    command('cat /etc/issue.net').stdout
   end
 end

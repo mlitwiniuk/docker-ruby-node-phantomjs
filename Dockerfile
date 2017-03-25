@@ -1,40 +1,41 @@
-FROM ubuntu:14.04
-MAINTAINER Flurin Egger <flurin@digitpaint.nl>
+FROM ubuntu:16.04
+MAINTAINER Maciej Litwiniuk <maciej@litwiniuk.net>
 
 RUN apt-get update
 RUN apt-get -y upgrade
 
 RUN apt-get -y install build-essential zlib1g-dev libssl-dev \
-               libreadline6-dev libyaml-dev git python-software-properties \
-               fontconfig libjpeg8 libjpeg-turbo8 libicu52
+               libreadline6-dev libyaml-dev git-core \
+               libicu55 \
+               libmagickwand-dev imagemagick libcurl4-openssl-dev
 
-ENV RUBY_DOWNLOAD_SHA256 ba5ba60e5f1aa21b4ef8e9bf35b9ddb57286cb546aac4b5a28c71f459467e507
-ADD https://cache.ruby-lang.org/pub/ruby/2.3/ruby-2.3.0.tar.gz /tmp/
+ENV RUBY_DOWNLOAD_SHA256 241408c8c555b258846368830a06146e4849a1d58dcaf6b14a3b6a73058115b7
+ADD https://cache.ruby-lang.org/pub/ruby/2.3/ruby-2.3.3.tar.gz /tmp/
 
 # Install ruby
 RUN \
   cd /tmp && \
-  echo "$RUBY_DOWNLOAD_SHA256 *ruby-2.3.0.tar.gz" | sha256sum -c - && \
-  tar -xzf ruby-2.3.0.tar.gz && \
-  cd ruby-2.3.0 && \
+  echo "$RUBY_DOWNLOAD_SHA256 *ruby-2.3.3.tar.gz" | sha256sum -c - && \
+  tar -xzf ruby-2.3.3.tar.gz && \
+  cd ruby-2.3.3 && \
   ./configure && \
   make && \
   make install && \
   cd .. && \
-  rm -rf ruby-2.3.0 && \
-  rm -f ruby-2.3.0.tar.gz
+  rm -rf ruby-2.3.3 && \
+  rm -f ruby-2.3.3.tar.gz
 
 RUN gem install bundler --no-ri --no-rdoc
 
 # Install node
-ENV NODEJS_DOWNLOAD_SHA256 d7742558bb3331e41510d6e6f1f7b13c0527aecc00a63c3e05fcfd44427ff778
-ADD https://nodejs.org/dist/v6.5.0/node-v6.5.0.tar.gz /tmp/
+ENV NODEJS_DOWNLOAD_SHA256 2c7a643b199c63390f4e33359e82f1449b84ec94d647c606fc0f1d1a2b5bdedd
+ADD https://nodejs.org/dist/v6.10.1/node-v6.10.1.tar.gz /tmp/
 
 RUN \
   cd /tmp && \
-  echo "$NODEJS_DOWNLOAD_SHA256 *node-v6.5.0.tar.gz" | sha256sum -c - && \
-  tar xvzf node-v6.5.0.tar.gz && \
-  rm -f node-v6.5.0.tar.gz && \
+  echo "$NODEJS_DOWNLOAD_SHA256 *node-v6.10.1.tar.gz" | sha256sum -c - && \
+  tar xvzf node-v6.10.1.tar.gz && \
+  rm -f node-v6.10.1.tar.gz && \
   cd node-v* && \
   ./configure && \
   CXX="g++ -Wno-unused-local-typedefs" make && \
@@ -43,12 +44,10 @@ RUN \
   rm -rf /tmp/node-v* && \
   echo -e '\n# Node.js\nexport PATH="node_modules/.bin:$PATH"' >> /root/.bashrc
 
-RUN npm install yarn@0.19.1 -g
-
 # Download phantomjs build (see README)
 RUN \
   cd /tmp && \
-  git clone https://github.com/digitpaint/phantomjs-build.git && \
+  git clone https://github.com/mlitwiniuk/phantomjs-build.git && \
   cd phantomjs-build && \
   cp bin/phantomjs /usr/local/bin/ && \
   cd /tmp && \
@@ -57,4 +56,4 @@ RUN \
 # Install extra dependencies
 # separated from the compile dependencies for node and ruby
 # to make use of docker build layers
-RUN apt-get -y install zip yui-compressor curl
+#RUN apt-get -y install zip yui-compressor curl
