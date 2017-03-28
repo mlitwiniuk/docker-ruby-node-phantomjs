@@ -54,5 +54,5 @@ RUN \
   rm -rf /tmp/phantomjs-build
 
 # Install extra dependencies
-RUN apt-get -y install libpq-dev libmysqlclient-dev libxslt-dev
+RUN apt-get -y install libpq-dev libmysqlclient-dev libxslt-dev libsqlite3-dev
 
