@@ -1,7 +1,7 @@
-# Docker-ruby-node-phantomjs
+# prograils/ruby-node-phantomjs
 
-Starting point for running Rails specs - includes ruby 2.3.3, node 6.10.1 and
-phantomjs 2.1.1
+Ruby, node with phantomjs bundled in. `latest` is always based on latest stable
+ruby version.
 
 ## What's inside
 
@@ -12,21 +12,12 @@ The reason that phantomjs is contained in a git repository is because
 of the time (> 1.5h) it takes to build phantomjs from source on my macbook.
 To avoid this time, a separate Dockerfile is used to build the binary.
 
-This README assume a working docker environment,
-for OSX ([boot2docker](http://boot2docker.io/)) provides a adequate way to set this up.
-
 ## Getting started
 
 ### Getting the image
 
 ```
 $ docker pull prograils/ruby-node-phantomjs
-```
-
-### Building the image (locally)
-
-```
-$ docker build prograils/ruby-node-phantomjs .
 ```
 
 ### Running
