@@ -1,7 +1,6 @@
 # prograils/ruby-node-phantomjs
 
-Ruby, node with phantomjs bundled in. `latest` is always based on latest stable
-ruby version.
+Ruby (2.4.1), node with phantomjs bundled in.
 
 ## What's inside
 
