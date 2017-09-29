@@ -1,4 +1,4 @@
-FROM prograils/ruby-node:latest
+FROM prograils/ruby-node:2.4.2
 MAINTAINER Maciej Litwiniuk <maciej@litwiniuk.net>
 
 # Install extra dependencies
